@@ -1,52 +1,67 @@
 
-let characterElement = document.createElement('img')
-let speed = 15
-let movement;
-let characterAssets = 'assets/character'
-characterElement.src = `${characterAssets}/static.gif`
-characterElement.style.position = 'absolute'
-characterElement.style.left = '0px'
-characterElement.style.top = '0px'
-characterElement.style.width = "50px"
-document.body.appendChild(characterElement)
+class Character{
 
-function walkEast(){
-    stop()
-    movement = setInterval(function(){
-        let currentPosition = parseInt(characterElement.style.left)
-        characterElement.style.left = currentPosition + 1 + 'px'
-    }, speed)  
-    characterElement.src = `${characterAssets}/walkright.gif`
+  constructor(){
+    this.element = document.createElement('img')
+    this.speed = 15
+    this.movement = null
+    this.assets = 'assets/character'
+    this.element.src = `${this.assets}/static.gif`
+    this.element.style.position = 'absolute'
+    this.element.style.left = '0px'
+    this.element.style.top = '0px'
+    this.element.style.width = "50px"
+    document.body.appendChild(this.element)
+  }
+
+  stop(){
+      clearInterval(this.movement)
+      this.element.src = `${this.assets}/static.gif`
+  }
+
+  walkEast(){
+    console.log(this, "second")
+      this.stop()
+      this.movement = setInterval(() => {
+        console.log(this, "third")
+          let currentPosition = parseInt(this.element.style.left)
+          this.element.style.left = currentPosition + 1 + 'px'
+      }, this.speed)
+      this.element.src = `${this.assets}/walkright.gif`
+  }
 }
 
-function walkWest(){
-    stop()
-    movement = setInterval(function(){
-        let currentPosition = parseInt(characterElement.style.left)
-        characterElement.style.left = currentPosition - 1 + 'px'
-    }, speed)  
-    characterElement.src = `${characterAssets}/walkleft.gif`
-}
 
-function walkNorth(){
-    stop()
-    movement = setInterval(function(){
-        let currentPosition = parseInt(characterElement.style.top)
-        characterElement.style.top = currentPosition - 1 + 'px'
-    }, speed)  
-    characterElement.src = `${characterAssets}/walkup.gif`
-}
-
-function walkSouth(){
-    stop()
-    movement = setInterval(function(){
-        let currentPosition = parseInt(characterElement.style.top)
-        characterElement.style.top = currentPosition + 1 + 'px'
-    }, speed)  
-    characterElement.src = `${characterAssets}/walkdown.gif`
-}
-
-function stop(){
-    clearInterval(movement)
-    characterElement.src = `${characterAssets}/static.gif`
-}
+//
+// function Character (){
+//   this.element = document.createElement('img')
+//   this.speed = 15
+//   this.movement = null
+//   this.assets = 'assets/character'
+//   this.element.src = `${this.assets}/static.gif`
+//   this.element.style.position = 'absolute'
+//   this.element.style.left = '0px'
+//   this.element.style.top = '0px'
+//   this.element.style.width = "50px"
+//   document.body.appendChild(this.element)
+//   console.log(this, "first")
+// }
+//
+// Character.prototype = {
+//   stop: function(){
+//       clearInterval(this.movement)
+//       this.element.src = `${this.assets}/static.gif`
+//   },
+//   walkEast: function(){
+//     console.log(this, "second")
+//       this.stop()
+//       this.movement = setInterval(() => {
+//         console.log(this, "third")
+//           let currentPosition = parseInt(this.element.style.left)
+//           this.element.style.left = currentPosition + 1 + 'px'
+//       }, this.speed)
+//       this.element.src = `${this.assets}/walkright.gif`
+//   }
+// }
+//
+//
